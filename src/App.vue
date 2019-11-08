@@ -1,28 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <order-component v-bind:component-order="order" v-on:update-order="updateOrder"></order-component>
+    <items-component ref="items" v-bind:component-order="order"></items-component>
+    <showmore-component v-on:show-more="loadItems"></showmore-component>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Items from "./components/Items";
+import Order from "./components/Order";
+import Showmore from "./components/Showmore";
 
 export default {
-  name: 'app',
+  name: "App",
+  data: function(){
+    return{
+      order: "normal"
+    }
+  },
   components: {
-    HelloWorld
+    "items-component": Items,
+    "showmore-component": Showmore,
+    "order-component": Order
+  },
+  methods: {
+    loadItems: function() {
+      this.$refs.items.loadItems();
+    },
+    updateOrder: function(order) {
+      this.order = order;
+    }
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
