@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <order-select v-bind:component-order="order" v-on:update-order="updateOrder"></order-select>
+    <order-select v-model="order"></order-select>
     <item-list v-bind:items="sortedItems"></item-list>
     <show-more-button v-on:click="loadItems"></show-more-button>
   </div>
@@ -44,10 +44,6 @@ export default {
   }
   ,
   methods: {
-    updateOrder(order) {
-      this.order = order;
-    },
-
     createItem() {
       return {
         id: Math.random(),
