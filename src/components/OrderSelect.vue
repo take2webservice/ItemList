@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select class="order" name="order" v-model="model">
+    <select class="order" name="order" v-model="order">
       <option
         v-for="option in orderOptions"
         v-bind:value="option.value"
@@ -27,7 +27,7 @@ export default {
   },
 
   computed: {
-    model: {
+    order: {
       get() {
         return this.value;
       },
