@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <order-component v-bind:component-order="order" v-on:update-order="updateOrder"></order-component>
-    <items-component ref="items" v-bind:component-order="order"></items-component>
-    <showmore-component v-on:show-more="loadItems"></showmore-component>
+    <order-select v-bind:component-order="order" v-on:update-order="updateOrder"></order-select>
+    <item-list ref="items" v-bind:component-order="order"></item-list>
+    <show-more-button v-on:show-more="loadItems"></show-more-button>
   </div>
 </template>
 
 <script>
-import Items from "./components/Items";
-import Order from "./components/Order";
-import Showmore from "./components/Showmore";
+import ItemList from "./components/ItemList";
+import ShowMoreButton from "./components/ShowMoreButton";
+import OrderSelect from "./components/OrderSelect";
 
 export default {
   name: "App",
@@ -19,9 +19,9 @@ export default {
     }
   },
   components: {
-    "items-component": Items,
-    "showmore-component": Showmore,
-    "order-component": Order
+    "item-list": ItemList,
+    "show-more-button": ShowMoreButton,
+    "order-select": OrderSelect
   },
   methods: {
     loadItems() {
