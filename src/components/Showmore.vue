@@ -7,7 +7,7 @@
 <script>
 export default {
   methods: {
-    loadItems: function() {
+    loadItems() {
       //eventhub.$emit('show-more')
       this.$emit("show-more");
     }

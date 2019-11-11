@@ -11,7 +11,7 @@
 <script>
 export default {
   computed: {
-    sortedItems: function() {
+    sortedItems() {
       switch (this.componentOrder) {
         case "low":
           return [...this.items].sort((a, b) => a.price - b.price);
@@ -25,22 +25,22 @@ export default {
   props: {
     componentOrder: String
   },
-  data: function() {
+  data() {
     return {
       items: this.createItems(9)
     };
   },
   methods: {
-    createItem: function() {
+    createItem() {
       return {
         title: "title" + Math.round(Math.random() * 100),
         price: Math.round(Math.random() * 100) * 100
       };
     },
-    createItems: function(i) {
+    createItems(i) {
       return Array.apply(null, Array(i)).map(() => this.createItem());
     },
-    loadItems: function() {
+    loadItems() {
       this.items.push(...this.createItems(5));
     }
   }

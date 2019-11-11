@@ -13,7 +13,7 @@ import Showmore from "./components/Showmore";
 
 export default {
   name: "App",
-  data: function(){
+  data(){
     return{
       order: "normal"
     }
@@ -24,10 +24,10 @@ export default {
     "order-component": Order
   },
   methods: {
-    loadItems: function() {
+    loadItems() {
       this.$refs.items.loadItems();
     },
-    updateOrder: function(order) {
+    updateOrder(order) {
       this.order = order;
     }
   }

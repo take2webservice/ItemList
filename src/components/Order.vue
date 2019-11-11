@@ -15,7 +15,7 @@ export default {
   props: {
     componentOrder: String
   },
-  data: function() {
+  data() {
     return {
       orderOptions: [
         { text: "読み込み順", value: "normal" },
