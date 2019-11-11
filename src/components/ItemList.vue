@@ -1,6 +1,6 @@
 <template>
   <ul class="items">
-    <li class="item" v-for="item in sortedItems" v-bind:key="item.id">
+    <li class="item" v-for="item in items" v-bind:key="item.id">
       <img src="https://dummyimage.com/200.png/09f/fff" alt="dummy">
       <div class="title">{{ item.title }}</div>
       <div class="price">{{ item.price }}円</div>
@@ -10,41 +10,9 @@
 
 <script>
 export default {
-  computed: {
-    sortedItems() {
-      switch (this.componentOrder) {
-        case "low":
-          return [...this.items].sort((a, b) => a.price - b.price);
-        case "high":
-          return [...this.items].sort((a, b) => b.price - a.price);
-        default:
-          return [...this.items];
-      }
-    }
-  },
   props: {
-    componentOrder: String
+    items: Array,
   },
-  data() {
-    return {
-      items: this.createItems(9)
-    };
-  },
-  methods: {
-    createItem() {
-      return {
-        id: Math.random(),
-        title: "title" + Math.round(Math.random() * 100),
-        price: Math.round(Math.random() * 100) * 100
-      };
-    },
-    createItems(i) {
-      return Array.apply(null, Array(i)).map(() => this.createItem());
-    },
-    loadItems() {
-      this.items.push(...this.createItems(5));
-    }
-  }
 };
 </script>
 
