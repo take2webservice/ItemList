@@ -1,15 +1,14 @@
 <template>
   <div class="btn_wrap">
-    <button class="more" v-on:click="loadItems">さらに読み込む(c)</button>
+    <button class="more" v-on:click="onClick">さらに読み込む(c)</button>
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    loadItems: function() {
-      //eventhub.$emit('show-more')
-      this.$emit("show-more");
+    onClick() {
+      this.$emit("click");
     }
   }
 };

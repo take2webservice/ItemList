@@ -1,34 +1,64 @@
 <template>
   <div id="app">
-    <order-component v-bind:component-order="order" v-on:update-order="updateOrder"></order-component>
-    <items-component ref="items" v-bind:component-order="order"></items-component>
-    <showmore-component v-on:show-more="loadItems"></showmore-component>
+    <order-select v-model="order"></order-select>
+    <item-list v-bind:items="sortedItems"></item-list>
+    <show-more-button v-on:click="loadItems"></show-more-button>
   </div>
 </template>
 
 <script>
-import Items from "./components/Items";
-import Order from "./components/Order";
-import Showmore from "./components/Showmore";
+import ItemList from "./components/ItemList";
+import ShowMoreButton from "./components/ShowMoreButton";
+import OrderSelect from "./components/OrderSelect";
 
 export default {
   name: "App",
-  data: function(){
+  components: {
+    "item-list": ItemList,
+    "show-more-button": ShowMoreButton,
+    "order-select": OrderSelect
+  },
+
+  data(){
     return{
+      items: [],
       order: "normal"
     }
   },
-  components: {
-    "items-component": Items,
-    "showmore-component": Showmore,
-    "order-component": Order
+
+  computed: {
+    sortedItems() {
+      switch (this.order) {
+        case "low":
+          return [...this.items].sort((a, b) => a.price - b.price);
+        case "high":
+          return [...this.items].sort((a, b) => b.price - a.price);
+        default:
+          return [...this.items];
+      }
+    }
   },
+
+  created() {
+    this.addItems(9);
+  },
+
   methods: {
-    loadItems: function() {
-      this.$refs.items.loadItems();
+    createItem() {
+      return {
+        id: Math.random(),
+        title: "title" + Math.round(Math.random() * 100),
+        price: Math.round(Math.random() * 100) * 100
+      };
     },
-    updateOrder: function(order) {
-      this.order = order;
+
+    addItems(count) {
+      const newItems = [...Array(count)].map(() => this.createItem());
+      this.items.push(...newItems);
+    },
+
+    loadItems() {
+      this.addItems(5);
     }
   }
 };

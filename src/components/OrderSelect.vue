@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select class="order" name="order" v-model="innerComponentOrder">
+    <select class="order" name="order" v-model="order">
       <option
         v-for="option in orderOptions"
         v-bind:value="option.value"
@@ -13,9 +13,10 @@
 <script>
 export default {
   props: {
-    componentOrder: String
+    value: String
   },
-  data: function() {
+
+  data() {
     return {
       orderOptions: [
         { text: "読み込み順", value: "normal" },
@@ -24,13 +25,14 @@ export default {
       ]
     };
   },
+
   computed: {
-    innerComponentOrder: {
+    order: {
       get() {
-        return this.componentOrder;
+        return this.value;
       },
       set(value) {
-        this.$emit("update-order", value);
+        this.$emit("input", value);
       }
     }
   }
