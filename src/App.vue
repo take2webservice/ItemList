@@ -40,9 +40,9 @@ export default {
   },
 
   created() {
-    this.loadItems();
-  }
-  ,
+    this.addItems(9);
+  },
+
   methods: {
     createItem() {
       return {
@@ -52,12 +52,13 @@ export default {
       };
     },
 
-    createItems(i) {
-      return Array.apply(null, Array(i)).map(() => this.createItem());
+    addItems(count) {
+      const newItems = [...Array(count)].map(() => this.createItem());
+      this.items.push(...newItems);
     },
 
     loadItems() {
-      this.items.push(...this.createItems(5));
+      this.addItems(5);
     }
   }
 };
