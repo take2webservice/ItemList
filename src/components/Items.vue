@@ -1,6 +1,6 @@
 <template>
   <ul class="items">
-    <li class="item" v-for="item in sortedItems">
+    <li class="item" v-for="item in sortedItems" v-bind:key="item.id">
       <img src="https://dummyimage.com/200.png/09f/fff" alt="dummy">
       <div class="title">{{ item.title }}</div>
       <div class="price">{{ item.price }}円</div>
@@ -33,6 +33,7 @@ export default {
   methods: {
     createItem() {
       return {
+        id: Math.random(),
         title: "title" + Math.round(Math.random() * 100),
         price: Math.round(Math.random() * 100) * 100
       };
